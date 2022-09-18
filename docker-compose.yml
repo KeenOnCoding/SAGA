@@ -1,0 +1,19 @@
+
+version: '3.4'
+
+services:
+
+  rabbitmq:
+    image: masstransit/rabbitmq:latest
+
+  saga.publisher:
+    image: ${DOCKER_REGISTRY-}sagapublisher
+    build:
+      context: .
+      dockerfile: Saga.Publisher\Dockerfile
+
+  saga.consumer:
+    image: ${DOCKER_REGISTRY-}sagaconsumer
+    build:
+      context: .
+      dockerfile: Saga.Consumer\Dockerfile
